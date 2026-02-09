@@ -1,13 +1,19 @@
 const http = require("http");
+const express = require("express");
+const path = require("path");
 const { Server } = require("socket.io");
 
-const server = http.createServer();
+const app = express();
+const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://127.0.0.1:5500",
+    origin: "*",
     methods: ["GET", "POST"],
   },
 });
+
+// Serve static files from frontend directory
+app.use(express.static(path.join(__dirname, "../frontend")));
 
 const { initGame, gameLoop, getUpdatedVel } = require("./game");
 const { FRAME_RATE } = require("./constants");
@@ -124,4 +130,7 @@ function emitGameOver(roomName, winner) {
   io.sockets.in(roomName).emit("gameOver", JSON.stringify({ winner }));
 }
 
-server.listen(3000);
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

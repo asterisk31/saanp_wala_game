@@ -2,7 +2,8 @@ const BG_COLOUR = "#ebc9d2";
 const SNAKE_COLOUR = "#450505";
 const FOOD_COLOUR = "#e66916";
 
-const socket = io("http://127.0.0.1:3000");
+// Use current origin for socket connection (works both locally and in production)
+const socket = io();
 
 socket.on("init", handleInit);
 socket.on("gameState", handleGameState);
