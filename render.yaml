@@ -2,7 +2,7 @@ services:
   - type: web
     name: saanp-wala-game
     buildCommand: "cd server && npm install"
-    startCommand: "cd server && npm start"
+    startCommand: "cd server && node server.js"
     envVars:
       - key: PORT
         value: 3000
