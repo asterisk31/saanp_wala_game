@@ -114,8 +114,6 @@ function gameLoop(state) {
     //shift the last one off the end
     player1.snake.push({ ...player1.pos });
     player1.snake.shift();
-
-    return 0;
   }
   if (player2.vel.x || player2.vel.y) {
     for (let cell of player2.snake) {
@@ -125,9 +123,9 @@ function gameLoop(state) {
     }
     player2.snake.push({ ...player2.pos });
     player2.snake.shift();
-
-    return 0;
   }
+
+  return 0;
 }
 
 function randomFood(state) {

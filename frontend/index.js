@@ -2,8 +2,10 @@ const BG_COLOUR = "#ebc9d2";
 const SNAKE_COLOUR = "#450505";
 const FOOD_COLOUR = "#e66916";
 
-// Use current origin for socket connection (works both locally and in production)
-const socket = io();
+// Connect to socket.io - localhost:3000 for development, current origin for production
+const socket = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+  ? io("http://localhost:3000")
+  : io();
 
 socket.on("init", handleInit);
 socket.on("gameState", handleGameState);
@@ -68,7 +70,7 @@ function paintGame(state) {
   context.fillRect(food.x * size, food.y * size, size, size);
 
   paintPlayer(state.players[0], size, SNAKE_COLOUR);
-  paintPlayer(state.players[1], size, "rgba(104, 0, 73, 0.33)");
+  paintPlayer(state.players[1], size, "rgba(0, 210, 46, 0.33)");
 }
 
 function paintPlayer(playerState, size, color) {
