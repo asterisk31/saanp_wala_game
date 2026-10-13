@@ -1,11 +1,15 @@
-const BG_COLOUR = "#ebc9d2";
+const BG_COLOUR = "rgb(235, 201, 210)";
 const SNAKE_COLOUR = "#450505";
 const FOOD_COLOUR = "#e66916";
 
+//check 
+
 // Connect to socket.io - localhost:3000 for development, current origin for production
-const socket = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
-  ? io("http://localhost:3000")
-  : io();
+const socket =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1"
+    ? io("http://localhost:3000")
+    : io();
 
 socket.on("init", handleInit);
 socket.on("gameState", handleGameState);
@@ -113,7 +117,7 @@ function handleUnknownCode() {
 }
 
 function handleTooManyPlayers() {
-    reset();
+  reset();
   alert("this game is alr full");
 }
 
